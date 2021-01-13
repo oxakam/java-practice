@@ -26,7 +26,7 @@ public class Main {
 //		Function <Car, String> priceAndColor = (c) -> {
 //			return "Price = " + c.getPrice() + ", color = " + c.getColor();
 //		};
-		//its just one line
+		//it's just one line
 		Function <Car, String> priceAndColor = (c) -> "Price = " + c.getPrice() + ", color = " + c.getColor();
 		String stringCar = priceAndColor.apply(cars.get(0));
 		

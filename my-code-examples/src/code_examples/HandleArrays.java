@@ -4,29 +4,37 @@ import java.util.Arrays;
 
 public class HandleArrays {
 
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
+		
 		//Find intersection and union of two arrays 
 		int a[] = { 1, 3, 2, 3, 4, 5, 5, 6, 10 };
 		int b[] = { 3, 5, 9, 2, 11, 1 };
 		 
 		int n = a.length;
 		int m = b.length;
-
-		getArrayIntersection(a, b, n, m);
-		      
-			System.out.println();
-		        
-		getArrayUnion(a, b, n, m);
 		
-			System.out.println("Sum of two:");
+		int clonedArray[] = a.clone();
 		
-		getSumOfTwo(a, 7);        
+		System.out.println("Array Intersection: ");
+		
+			getArrayIntersection(a, b, n, m);		
+		
+		System.out.println();			
+		System.out.println("Array Union: "); 
+		
+			getArrayUnion(a, b, n, m);
+			
+		System.out.println();
+		System.out.println("Sum of two numbers:");	
+		
+			getSumOfTwo(clonedArray, 7); //not sorted        
 		        
-			System.out.println();
+		System.out.println();
 		        
-		getMiddleNumber(100, 45, 8);		        
+			getMiddleNumber(100, 45, 8);		        
 	}
     
+	
 	static void getArrayIntersection (int arr1[], int arr2[], int n, int m)
     {
         int i = 0; 

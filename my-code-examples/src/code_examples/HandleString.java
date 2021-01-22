@@ -1,11 +1,17 @@
 package code_examples;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 class HandleString {
 
-	private static final String LONGEST_WORD   = "1 - Find the longest word";
+	private static final String LONGEST_WORD = "1 - Find the longest word";
 	private static final String PERMUTE_STRING = "2 - Permute the string";
+	private static final String DUPLICATE_WORDS = "3 - Find duplicate words";
 
 	public static void main(String[] args) { 
 		
@@ -15,6 +21,7 @@ class HandleString {
 	     System.out.println("Select the action: ");
 	     System.out.println(LONGEST_WORD);
 	     System.out.println(PERMUTE_STRING);
+	     System.out.println(DUPLICATE_WORDS);
 	     
 	     String action = "";
 	     
@@ -41,6 +48,13 @@ class HandleString {
 			    	 scanner.close();
 			    	 break; 
 			 
+			     case "3": 				
+				     System.out.print("Write set of words: ");
+				     String wordSet = scanner.nextLine();	
+				 
+				     findDuplicates(wordSet);
+			    	 break; 
+			    	 
 			     default:
 			    	 System.out.print("Type correct action !");
 			    	 break;
@@ -48,7 +62,7 @@ class HandleString {
 		 }	     
 	}
 	
-	public static void longestWord(String sentence) {
+	private static void longestWord(String sentence) {
 	    
 		String[] senArray = sentence.split(" ");   //[^a-z^0-9]		
 		int longestIndex = 0;		
@@ -82,7 +96,7 @@ class HandleString {
     }
 	
 	//i,j - position 1,2
-	public static String swap(String chars, int i, int j) 
+	private static String swap(String chars, int i, int j) 
     { 
         char temp;        
         char[] charArray = chars.toCharArray();
@@ -92,6 +106,20 @@ class HandleString {
         charArray[j] = temp; 
         
         return String.valueOf(charArray); 	//swapped string 
+    }
+	
+	
+	private static void findDuplicates(String text) 
+    { 		
+		List<String> listWords = Arrays.asList(text.split(" "));
+		 
+        Set<String> uniqueWords = new HashSet<String>(listWords);
+        
+        for (String word : uniqueWords) {
+        	
+        	//frequency - returns the number of elements 'word' in the collection 
+            System.out.println(word + ": " + Collections.frequency(listWords, word));
+        }
     }
 
 }

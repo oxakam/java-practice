@@ -1,67 +1,93 @@
 package code_examples;
 
- class HandleString {
+import java.util.Scanner;
+
+class HandleString {
+
+	private static final String LONGEST_WORD   = "1 - Find the longest word";
+	private static final String PERMUTE_STRING = "2 - Permute the string";
 
 	public static void main(String[] args) { 
 		
-	     System.out.print(LongestWord("Its my life"));
-	     System.out.println();
+	     //read function from user input
+	     Scanner scanner = new Scanner(System.in);
+			
+	     System.out.println("Select the action: ");
+	     System.out.println(LONGEST_WORD);
+	     System.out.println(PERMUTE_STRING);
 	     
-	     String str = "ABD"; 	//print all permutations of a given string. 
-	     int n = str.length(); 	    
-	     permute(str, 0, n-1); 
+	     String action = "";
+	     
+	     while (true) {						//do until action is correct
+	    	action = scanner.nextLine();	//read user input 
+	   
+		     switch(action) {
+			     case "1":			
+				     System.out.print("Write set of words: ");
+				     String setOfWords = scanner.nextLine();	
+				     
+				     longestWord(setOfWords);
+				     
+				     scanner.close();
+				     break;
+			       
+			     case "2": 				
+				     System.out.print("Write chars to permute: ");
+				     String setOfChars = scanner.nextLine();	
+				 
+				     int len = setOfChars.length(); 
+			    	 permute(setOfChars, 0, len - 1);
+			    	 
+			    	 scanner.close();
+			    	 break; 
+			 
+			     default:
+			    	 System.out.print("Type correct action !");
+			    	 break;
+		     }
+		 }	     
 	}
 	
-	public static String LongestWord(String sentence) {
+	public static void longestWord(String sentence) {
 	    
-		String[] senArray = sentence.split("[^a-z^0-9]");
-		
-		int longestIndex = 0;
-		
+		String[] senArray = sentence.split(" ");   //[^a-z^0-9]		
+		int longestIndex = 0;		
 		String longestWord = "";
 		
 		for (int i = 0; i < senArray.length; i++) {
 
 			if (senArray[i].length() > longestIndex) {
 				
-				longestWord = senArray[i];
+				longestWord  = senArray[i];
 				longestIndex = senArray[i].length();
 			}
 		}
-	    return longestWord;
-	  }
+		System.out.println("Longest word: " + longestWord);
+	}
 	
-	/* @param - str string to calculate permutation for 
-     * @param - l start index 
-     * @param - r end index 
-     */
-	private static void permute(String str, int l, int r) 
-    { 
-        if (l == r) 
-            System.out.println(str); 
+	//start & end index 
+	private static void permute(String chars, int start, int end) 
+    { 		
+        if (start == end) 
+            System.out.println(chars); 
         else
         { 
-            for (int i = l; i <= r; i++) 
+            for (int i = start; i <= end; i++) 
             { 
-                str = swap(str,l,i); 
-                permute(str, l+1, r); 
-                str = swap(str,l,i); 
+            	chars = swap(chars, start, i); 
+                     permute(chars, start+1, end); 
+                chars = swap(chars, start, i); 
             } 
-        } 
+        }
     }
-	/* @param - a string value 
-     * @param - i position 1 
-     * @param - j position 2 
-     * @return - swapped string 
-     */
-	public static String swap(String a, int i, int j) 
+	
+	//i,j - position 1,2
+	public static String swap(String chars, int i, int j) 
     { 
-        char temp;
+        char temp;        
+        char[] charArray = chars.toCharArray();
         
-        char[] charArray = a.toCharArray();
-        
-        temp = charArray[i] ;
-        
+        temp = charArray[i] ;        
         charArray[i] = charArray[j]; 
         charArray[j] = temp; 
         

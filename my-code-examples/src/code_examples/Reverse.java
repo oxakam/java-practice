@@ -22,6 +22,12 @@ public class Reverse {
         reverseWordsInSentence(words);
  
         reverseEntireSentence(initialString);
+        
+        reverseUsingStringBuilder(initialString);
+        
+        String recurString = reverseRecursively(initialString);
+        System.out.println("Recursively string: " + recurString);
+        
 	}
 	
 	static void reverseEachWord(String words[]) {
@@ -73,5 +79,20 @@ public class Reverse {
 			reversedSentence = reversedSentence + initialString.charAt(i);
         }        
         System.out.println("Reversed entire sentence: " + reversedSentence);
+	}
+	
+	static void reverseUsingStringBuilder(String initialString) {
+		
+		StringBuilder reverseString = new StringBuilder(initialString).reverse();
+		
+        System.out.println("Reversed with StringBuilder: " + reverseString);
+	}	
+
+	private static String reverseRecursively(String initialString) {
+		
+		if (initialString.isEmpty()) {
+	         return initialString;
+	    }
+		return reverseRecursively(initialString.substring(1)) + initialString.charAt(0);
 	}
 }
